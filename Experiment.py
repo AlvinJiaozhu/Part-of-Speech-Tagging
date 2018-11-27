@@ -699,4 +699,6 @@ data2 = experiment(3, False, "training.txt", "testdata_untagged.txt", "testdata_
 data3 = experiment(2, True, "training.txt", "testdata_untagged.txt", "testdata_tagged.txt")
 data4 = experiment(3, True, "training.txt", "testdata_untagged.txt", "testdata_tagged.txt")
 # Draw the line graph.
-plot_lines([data1, data2, data3, data4], "Part of Speech Tag Accuracy", "Proportion of Training Data", "Accuracy Values", ["Experiment 1: Bigram without smoothing", "Experiment 2: Trigram without smoothing", "Experiment 3: Bigram with smoothing", "Experiment 4: Trigram with smoothing"])
+plot_lines([data1, data2, data3, data4], "Part of Speech Tag Accuracy", "Proportion of Training Data", "Accuracy Values",
+           ["Experiment 1: Bigram without smoothing", "Experiment 2: Trigram without smoothing",
+            "Experiment 3: Bigram with smoothing", "Experiment 4: Trigram with smoothing"])
