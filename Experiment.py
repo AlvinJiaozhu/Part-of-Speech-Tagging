@@ -2,10 +2,12 @@
 # Experiment
 
 import math
-import pylab
 import types
 import numpy
+from matplotlib import pylab
+from pylab import *
 from collections import *
+
 
 class HMM:
 	"""
@@ -21,12 +23,9 @@ class HMM:
 
 def read_pos_file(filename):
 	"""
-	Parses an input tagged text file.
-	Input:
-	filename --- the file to parse
-	Returns:
-	The file represented as a list of tuples, where each tuple
-	is of the form (word, POS-tag).
+	Reads a text file.
+	Input: filename
+	Returns: The file represented as a list of tuples, where each tuple is of the form (word, POS-tag).
 	A list of unique words found in the file.
 	A list of unique POS tags found in the file.
 	"""
@@ -102,15 +101,15 @@ def plot_lines(data, title, xlabel, ylabel, labels=None, filename=None):
 	Returns:
 	None
 	"""
-	### Check that the data is a list
+	# Check that the data is a list
 	if not isinstance(data, types.ListType):
 		msg = "data must be a list, not {0}".format(type(data).__name__)
 		raise TypeError(msg)
 
-	### Create a new figure
+	# Create a new figure
 	fig = pylab.figure()
 
-	### Plot the data
+	# Plot the data
 	if labels:
 		mylabels = labels[:]
 		for i in range(len(data)-len(labels)):
@@ -126,23 +125,23 @@ def plot_lines(data, title, xlabel, ylabel, labels=None, filename=None):
 		for d in data:
 			_plot_dict_line(d)
 
-	### Set the lower y limit to 0 or the lowest number in the values
+	# Set the lower y limit to 0 or the lowest number in the values
 	mins = [min(l.values()) for l in data]
 	ymin = min(0, min(mins))
 	pylab.ylim(ymin=ymin)
 
-	### Label the plot
+	# Label the plot
 	pylab.title(title)
 	pylab.xlabel(xlabel)
 	pylab.ylabel(ylabel)
 
-	### Draw grid lines
+	# Draw grid lines
 	pylab.grid(True)
 
-	### Show the plot
+	# Show the plot
 	fig.show()
 
-	### Save to file
+	# Save to file
 	if filename:
 		pylab.savefig(filename)
 
@@ -152,8 +151,11 @@ def compute_counts(training_data, order):
 	This function computes the counts of the training data, given the order of the HMM.
 	:param training_data: a list of (word, POS-tag) pairs.
 	:param order: order of the HMM.
-	:return: If order is 2, the function returns a tuple containing the number of tokens in training_data, a dictionary that contains that contains C(ti,wi), a dictionary that contains C(ti), and a dictionary that contains C(ti-1,ti).
-			 If order is 3, the function returns as the fifth element a dictionary that contains C(ti-2, ti-1, ti), in addition to the other four elements.
+	:return: If order is 2, the function returns a tuple containing the number of tokens in training_data,
+	a dictionary that contains that contains C(ti,wi), a dictionary that contains C(ti),
+	and a dictionary that contains C(ti-1,ti).
+	If order is 3, the function returns as the fifth element a dictionary that contains C(ti-2, ti-1, ti),
+	in addition to the other four elements.
 	"""
 	dict1 = defaultdict(lambda: defaultdict(int))
 	dict2 = defaultdict(int)
@@ -700,5 +702,5 @@ data3 = experiment(2, True, "training.txt", "testdata_untagged.txt", "testdata_t
 data4 = experiment(3, True, "training.txt", "testdata_untagged.txt", "testdata_tagged.txt")
 # Draw the line graph.
 plot_lines([data1, data2, data3, data4], "Part of Speech Tag Accuracy", "Proportion of Training Data", "Accuracy Values",
-           ["Experiment 1: Bigram without smoothing", "Experiment 2: Trigram without smoothing",
-            "Experiment 3: Bigram with smoothing", "Experiment 4: Trigram with smoothing"])
+		   ["Experiment 1: Bigram without smoothing", "Experiment 2: Trigram without smoothing",
+			"Experiment 3: Bigram with smoothing", "Experiment 4: Trigram with smoothing"])
