@@ -19,12 +19,9 @@ class HMM:
 
 def read_pos_file(filename):
 	"""
-	Parses an input tagged text file.
-	Input:
-	filename --- the file to parse
-	Returns:
-	The file represented as a list of tuples, where each tuple
-	is of the form (word, POS-tag).
+	Reads a text file.
+	Input: filename
+	Returns: The file represented as a list of tuples, where each tuple is of the form (word, POS-tag).
 	A list of unique words found in the file.
 	A list of unique POS tags found in the file.
 	"""
@@ -49,8 +46,11 @@ def compute_counts(training_data, order):
 	This function computes the counts of the training data, given the order of the HMM.
 	:param training_data: a list of (word, POS-tag) pairs.
 	:param order: order of the HMM.
-	:return: If order is 2, the function returns a tuple containing the number of tokens in training_data, a dictionary that contains that contains C(ti,wi), a dictionary that contains C(ti), and a dictionary that contains C(ti-1,ti).
-			 If order is 3, the function returns as the fifth element a dictionary that contains C(ti-2, ti-1, ti), in addition to the other four elements.
+	:return: If order is 2, the function returns a tuple containing the number of tokens in training_data,
+	a dictionary that contains that contains C(ti,wi), a dictionary that contains C(ti),
+	and a dictionary that contains C(ti-1,ti).
+	If order is 3, the function returns as the fifth element a dictionary that contains C(ti-2, ti-1, ti),
+	in addition to the other four elements.
 	"""
 	dict1 = defaultdict(lambda: defaultdict(int))
 	dict2 = defaultdict(int)
